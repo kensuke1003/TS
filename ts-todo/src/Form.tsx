@@ -10,3 +10,11 @@ const Form: FC = () => {
 };
 
 export default Form;
+
+
+
+
+
+
+
+// これはchatappから撮ってきたもの
