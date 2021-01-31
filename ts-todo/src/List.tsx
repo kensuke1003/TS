@@ -1,13 +1,32 @@
 import { FC } from 'react';
 import Item from './Item';
+import { Todo } from './App';
 
-const List: FC = () => {
+
+//必要なPropsを描く
+type Props = {
+  todos: Todo[];
+  //　？はオプショナル
+  abc?: string;
+  deleteTodo: (id:string)=>void;
+  toggleTodo: (id: string) =>void;
+};
+const List: FC<Props> = ({todos,deleteTodo,toggleTodo}) => {
   return (
     <>
-      <Item />
-      <Item />
-      <Item />
-    </>
+      {todos.map((todo)=>{
+        return(
+          <Item
+          key={todo.id}
+          content={todo.content}
+          id={todo.id}
+          isDone={todo.isDone}
+          deleteTodo={deleteTodo}
+          toggleTodo={toggleTodo}
+          />
+        );
+      })}
+      </>
   );
 };
 

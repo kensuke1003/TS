@@ -1,9 +1,26 @@
-import { FC } from 'react';
+import { FC,useState } from 'react';
 
-const Form: FC = () => {
+type Props= {
+   addTodo: (text: string) => void;
+ }
+
+
+const Form: FC<Props> = ({addTodo}) => {
+  const [text,setText] = useState('');
+
+  const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault();
+    if(text.length === 0){
+      alert('文字を入力してください');
+      return;
+    }
+    addTodo(text);
+    setText('');
+  };
+
   return (
-    <form>
-      <input />
+    <form onSubmit ={handleSubmit}>
+      <input value={text} onChange= {(e)=>setText(e.target.value)} />
       <button>送信</button>
     </form>
   );
